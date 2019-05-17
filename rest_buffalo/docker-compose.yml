@@ -1,0 +1,38 @@
+version: "3.3"
+
+services:
+  fr-ops-buffalo:
+    build:
+      args:
+        - http_proxy
+        - https_proxy
+        - no_proxy
+      context: ./
+      dockerfile: ./Dockerfile
+    image: fr-ops-buffalo:latest
+    hostname: buffalo
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./:/go/src/rest_helm/
+    depends_on:
+      - fr-ops-postgres
+    networks:
+      helm_service_network:
+        aliases:
+          - buffalo
+  fr-ops-postgres:
+    image: postgres:10.5-alpine
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: round_the_outside
+      POSTGRES_DB: rest_helm_development
+    networks:
+      helm_service_network:
+        aliases:
+          - fr-ops-postgres
+
+networks:
+  helm_service_network:

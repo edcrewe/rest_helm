@@ -1,0 +1,13 @@
+development:
+  dialect: postgres
+  database: rest_helm_development
+  user: postgres
+  password: round_the_outside
+  host: fr-ops-postgres
+  pool: 5
+
+test:
+  url: {{envOr "TEST_DATABASE_URL" "postgres://postgres:postgres@fr-ops-postgres:5432/rest_helm_test?sslmode=disable"}}
+
+production:
+  url: {{envOr "DATABASE_URL" "postgres://postgres:postgres@fr-ops-postgres:5432/rest_helm_production?sslmode=disable"}}
