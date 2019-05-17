@@ -7,7 +7,7 @@ import (
   paramlogger "github.com/gobuffalo/mw-paramlogger"
   "github.com/unrolled/secure"
 
-  
+
   "rest_helm/models"
   "github.com/gobuffalo/buffalo-pop/pop/popmw"
   csrf "github.com/gobuffalo/mw-csrf"
@@ -51,12 +51,12 @@ func App() *buffalo.App {
     // Remove to disable this.
     app.Use(csrf.New)
 
-    
+
     // Wraps each request in a transaction.
     //  c.Value("tx").(*pop.Connection)
     // Remove to disable this.
     app.Use(popmw.Transaction(models.DB))
-    
+
 
     // Setup and use translations:
     app.Use(translations())
@@ -64,6 +64,17 @@ func App() *buffalo.App {
     app.GET("/", HomeHandler)
 
     app.ServeFiles("/", assetsBox) // serve files from the public directory
+
+    // /api/v1 prefix for new routes
+    g := app.Group("/api/v1")
+
+    // new DownloadResource
+    ur := &DownloadResource{}
+
+    // new route and handler UserResource.List
+    // the path is /api/v1/users
+    g.GET("/users", ur.List)
+
   }
 
   return app
