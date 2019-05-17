@@ -72,8 +72,8 @@ func App() *buffalo.App {
     ur := &DownloadResource{}
 
     // new route and handler UserResource.List
-    // the path is /api/v1/users
-    g.GET("/users", ur.List)
+    // the path is /api/v1/download
+    g.GET("/download", ur.List)
 
   }
 

@@ -17,7 +17,8 @@ teardown:
 
 run: clean teardown
 	docker-compose --project-name=buffalo_service up --force-recreate --no-start
-	docker-compose --project-name=buffalo_service run -d -p 3000:3000 --name="fr-ops-buffalo" fr-ops-buffalo /bin/bash -c "cd rest_buffalo && buffalo dev"
+	docker-compose --project-name=buffalo_service run -d -p 3000:3000 --name="fr-ops-buffalo" fr-ops-buffalo /bin/bash -c "sleep 1d"
+# "cd rest_buffalo && buffalo dev"
 	docker exec -it fr-ops-buffalo bash
 
 test:
