@@ -3,7 +3,7 @@ package main
 import (
   "log"
 
-  "rest_helm/actions"
+  "rest_helm/rest_buffalo/actions"
 )
 
 // main is the starting point for your Buffalo application.

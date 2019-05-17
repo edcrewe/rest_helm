@@ -8,7 +8,7 @@ import (
   "github.com/unrolled/secure"
 
 
-  "rest_helm/models"
+  "rest_helm/rest_buffalo/models"
   "github.com/gobuffalo/buffalo-pop/pop/popmw"
   csrf "github.com/gobuffalo/mw-csrf"
   i18n "github.com/gobuffalo/mw-i18n"

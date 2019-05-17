@@ -2,7 +2,7 @@ package actions
 
 import (
 	"github.com/gobuffalo/buffalo"
-	"github.com/edcrewe/rest_helm/rest_buffalo/models"
+	"rest_helm/rest_buffalo/models"
 )
 
 var db = make(map[string]models.Download)
