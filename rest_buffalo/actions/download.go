@@ -10,6 +10,7 @@ var db = make(map[string]models.Download)
 type DownloadResource struct{}
 
 // List all available downloaded charts
+// @Router /api/v1/download [get]
 func (downr DownloadResource) List(c buffalo.Context) error {
 	download := &models.Download{
 		Name:           "mariadb",
@@ -20,6 +21,8 @@ func (downr DownloadResource) List(c buffalo.Context) error {
 }
 
 // Show a download by name.
+// @Param name path string true "Chart name"
+// @Router /api/v1/download/{name} [get]
 func (downr DownloadResource) Show(c buffalo.Context) error {
 
 	name := c.Param("name")
@@ -33,6 +36,11 @@ func (downr DownloadResource) Show(c buffalo.Context) error {
 }
 
 // Create Download.
+/// ...
+// @Param name path string true "Chart name"
+// @Param url path int true "Chart source URL"
+// ...
+// @Router /api/v1 [post]
 func (ur DownloadResource) Create(c buffalo.Context) error {
 	name := c.Param("name")
 	url := c.Param("url")

@@ -11,6 +11,11 @@ import (
 	csrf "github.com/gobuffalo/mw-csrf"
 	i18n "github.com/gobuffalo/mw-i18n"
 	"github.com/gobuffalo/packr/v2"
+
+	buffaloSwagger "github.com/swaggo/buffalo-swagger"
+	"github.com/swaggo/buffalo-swagger/swaggerFiles"
+
+	_ "rest_helm/rest_buffalo/docs"
 	"rest_helm/rest_buffalo/models"
 )
 
@@ -20,19 +25,20 @@ var ENV = envy.Get("GO_ENV", "development")
 var app *buffalo.App
 var T *i18n.Translator
 
-// App is where all routes and middleware for buffalo
-// should be defined. This is the nerve center of your
-// application.
-//
-// Routing, middleware, groups, etc... are declared TOP -> DOWN.
-// This means if you add a middleware to `app` *after* declaring a
-// group, that group will NOT have that new middleware. The same
-// is true of resource declarations as well.
-//
-// It also means that routes are checked in the order they are declared.
-// `ServeFiles` is a CATCH-ALL route, so it should always be
-// placed last in the route declarations, as it will prevent routes
-// declared after it to never be called.
+// @title Swagger REST Helm API
+// @version 1.0
+// @description This is a RESTful API for Helm
+// @termsOfService http://swagger.io/terms/
+
+// @contact.name API Support
+// @contact.url http://www.swagger.io/support
+// @contact.email support@swagger.io
+
+// @license.name Apache 2.0
+// @license.url http://www.apache.org/licenses/LICENSE-2.0.html
+
+// @host helm.example.com
+// @BasePath /v1
 func App() *buffalo.App {
 	if app == nil {
 		app = buffalo.New(buffalo.Options{
@@ -71,6 +77,8 @@ func App() *buffalo.App {
 		g.POST("/download", ur.Create)
 
 		g.GET("/download/{name}", ur.Show)
+
+		app.GET("/swagger/{doc:.*}", buffaloSwagger.WrapHandler(swaggerFiles.Handler))
 
 		// NB: Must run this last ...
 		app.ServeFiles("/", assetsBox) // serve files from the public directory

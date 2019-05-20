@@ -33,8 +33,9 @@ RUN go get -v -u github.com/gobuffalo/buffalo/buffalo \
 && go get -v -u github.com/gobuffalo/mw-csrf \
 && go get -v -u github.com/gobuffalo/mw-forcessl \
 && go get -v -u github.com/gobuffalo/mw-i18n \
-&& go get -v -u github.com/gobuffalo/mw-paramlogger
-&& go get -v -u github.com/swaggo/swag/cmd/swag
+&& go get -v -u github.com/gobuffalo/mw-paramlogger \
+&& go get -v -u github.com/swaggo/swag/cmd/swag \
+&& go get -v -u github.com/swaggo/buffalo-swagger
 
 # this will cache the npm install step, unless package.json changes
 ADD package.json .
