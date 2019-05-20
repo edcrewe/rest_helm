@@ -35,10 +35,12 @@ RUN go get -v -u github.com/gobuffalo/buffalo/buffalo \
 && go get -v -u github.com/gobuffalo/mw-i18n \
 && go get -v -u github.com/gobuffalo/mw-paramlogger \
 && go get -v -u github.com/swaggo/swag/cmd/swag \
-&& go get -v -u github.com/swaggo/buffalo-swagger
+&& go get -v -u github.com/swaggo/buffalo-swagger \
+&& go get -v -u github.com/alecthomas/template \
+&& go get -v -u github.com/swaggo/swag/cmd/swag
 
 # this will cache the npm install step, unless package.json changes
-ADD package.json .
+ADD rest_buffalo/package.json .
 
 # RUN cd $GOPATH/src/rest_helm && buffalo setup || :
 
