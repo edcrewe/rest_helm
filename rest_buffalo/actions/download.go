@@ -31,7 +31,7 @@ func (ur DownloadResource) Create(c buffalo.Context) error {
 
 	return c.Render(201, r.JSON(download))
 }
-
+*/
 
 // Show Download by name.
 func (downr DownloadResource) Show(c buffalo.Context) error {
@@ -45,5 +45,3 @@ func (downr DownloadResource) Show(c buffalo.Context) error {
 
 	return c.Render(404, r.String("download not found"))
 }
-
-*/
