@@ -63,8 +63,6 @@ func App() *buffalo.App {
 
     app.GET("/", HomeHandler)
 
-    app.ServeFiles("/", assetsBox) // serve files from the public directory
-
     // /api/v1 prefix for new routes
     g := app.Group("/api/v1")
 
@@ -74,6 +72,9 @@ func App() *buffalo.App {
     // new route and handler UserResource.List
     // the path is /api/v1/download
     g.GET("/download", ur.List)
+
+    // NB: Must run this last ...
+    app.ServeFiles("/", assetsBox) // serve files from the public directory
 
   }
 

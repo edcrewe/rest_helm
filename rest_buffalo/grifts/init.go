@@ -2,7 +2,7 @@ package grifts
 
 import (
   "github.com/gobuffalo/buffalo"
-	"rest_helm/actions"
+  "rest_helm/rest_buffalo/actions"
 )
 
 func init() {
