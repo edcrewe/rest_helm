@@ -68,6 +68,7 @@ func App() *buffalo.App {
 
 		// new route and handler UserResource.List
 		g.GET("/download", ur.List)
+		g.POST("/download", ur.Create)
 
 		g.GET("/download/{name}", ur.Show)
 

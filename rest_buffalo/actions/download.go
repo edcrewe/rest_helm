@@ -9,31 +9,17 @@ var db = make(map[string]models.Download)
 
 type DownloadResource struct{}
 
+// List all available downloaded charts
 func (downr DownloadResource) List(c buffalo.Context) error {
-	download := &models.Download {
-		Name: "mariadb",
+	download := &models.Download{
+		Name:           "mariadb",
 		SourceLocation: "https://kubernetes-charts.storage.googleapis.com/",
 	}
 	db[download.Name] = *download
 	return c.Render(200, r.JSON(db))
 }
 
-/* Create Download.
-func (ur DownloadResource) Create(c buffalo.Context) error {
-	name, err := c.Param("name")
-	if err != nil {
-		return c.Render(500, r.String("name is not found"))
-	}
-	download := &models.Download{
-		name: name,
-	}
-	db[download.name] = *download
-
-	return c.Render(201, r.JSON(download))
-}
-*/
-
-// Show Download by name.
+// Show a download by name.
 func (downr DownloadResource) Show(c buffalo.Context) error {
 
 	name := c.Param("name")
@@ -44,4 +30,18 @@ func (downr DownloadResource) Show(c buffalo.Context) error {
 	}
 
 	return c.Render(404, r.String("download not found"))
+}
+
+// Create Download.
+func (ur DownloadResource) Create(c buffalo.Context) error {
+	name := c.Param("name")
+	url := c.Param("url")
+
+	download := &models.Download{
+		Name:           name,
+		SourceLocation: url,
+	}
+	db[name] = *download
+
+	return c.Render(201, r.JSON(download))
 }
